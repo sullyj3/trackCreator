@@ -10,20 +10,20 @@ function lines_from(filename)
 end
 
 function main()
-	local tracklist = ""
-	local gotPath, tracklist = reaper.GetUserFileNameForRead(tracklist, "Select track list file", "txt")
-	if not gotPath then
-		return
-	end
+  local tracklist = ""
+  local gotPath, tracklist = reaper.GetUserFileNameForRead(tracklist, "Select track list file", "txt")
+  if not gotPath then
+    return
+  end
 
-	local lines = lines_from(tracklist)
+  local lines = lines_from(tracklist)
 
-	for i = 1, #lines do
-		reaper.InsertTrackAtIndex(reaper.GetNumTracks(), true)
-		local newTrack = reaper.GetTrack(0, reaper.GetNumTracks()-1)
-		reaper.GetSetMediaTrackInfo_String(newTrack, "P_NAME", lines[i], true)
+  for i = 1, #lines do
+    reaper.InsertTrackAtIndex(reaper.GetNumTracks(), true)
+    local newTrack = reaper.GetTrack(0, reaper.GetNumTracks()-1)
+    reaper.GetSetMediaTrackInfo_String(newTrack, "P_NAME", lines[i], true)
 
-	end
+  end
 end
 
 main()
